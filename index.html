@@ -424,6 +424,7 @@
   </div>
   <div class="categories" id="cat-row">
     <button class="cat-btn active" data-cat="all"        onclick="setCategory('all',this)"        data-en="All Items"       data-ar="الكل">All Items</button>
+    <button class="cat-btn"        data-cat="speciality" onclick="setCategory('speciality',this)" data-en="Riwak Speciality" data-ar="تخصصات رِواق">Riwak Speciality</button>
     <button class="cat-btn"        data-cat="hot"        onclick="setCategory('hot',this)"        data-en="Hot Coffee"      data-ar="قهوة ساخنة">Hot Coffee</button>
     <button class="cat-btn"        data-cat="cold"       onclick="setCategory('cold',this)"       data-en="Iced Coffee"     data-ar="قهوة باردة">Iced Coffee</button>
     <button class="cat-btn"        data-cat="matcha"     onclick="setCategory('matcha',this)"     data-en="Matcha"          data-ar="ماتشا">Matcha</button>
@@ -437,6 +438,50 @@
 </div>
 
 <main id="menu-main">
+
+  <!-- ── RIWAK SPECIALITY ── -->
+  <div class="menu-section" data-section="speciality">
+    <h2 class="section-title" data-en="Riwak Speciality" data-ar="تخصصات رِواق">Riwak Speciality</h2>
+    <div class="menu-grid">
+
+      <div class="menu-card visible" data-cat="speciality" data-name="riwak frappe special signature">
+        <div class="card-info">
+          <div class="card-name" data-en="Riwak Frappe" data-ar="فرابيه رِواق">Riwak Frappe</div>
+          <div class="card-desc" data-en="Our signature blended frappe — creamy, rich, and made the Riwak way." data-ar="فرابيه رِواق المميز — كريمي وغني ومحضّر بطريقتنا.">Our signature blended frappe — creamy, rich, and made the Riwak way.</div>
+          <div class="card-price">400,000 LL</div>
+        </div>
+        <div class="card-img-wrap"><img src="riwak-frappe.jpeg" alt="Riwak Frappe" loading="lazy" /></div>
+      </div>
+
+      <div class="menu-card visible" data-cat="speciality" data-name="white tahini tahina">
+        <div class="card-info">
+          <div class="card-name" data-en="White Tahini" data-ar="طحينة بيضاء">White Tahini</div>
+          <div class="card-desc" data-en="A smooth, creamy drink with white chocolate and nutty tahini — sweet and silky." data-ar="مشروب ناعم وكريمي بالشوكولاتة البيضاء والطحينة — حلو وحريري.">A smooth, creamy drink with white chocolate and nutty tahini — sweet and silky.</div>
+          <div class="card-price">400,000 LL</div>
+        </div>
+        <div class="card-img-wrap"><img src="white-tahini.jpeg" alt="White Tahini" loading="lazy" /></div>
+      </div>
+
+      <div class="menu-card visible" data-cat="speciality" data-name="passionada passion fruit">
+        <div class="card-info">
+          <div class="card-name" data-en="Passionada" data-ar="باسيونادا">Passionada</div>
+          <div class="card-desc" data-en="A tropical passion fruit blend — tangy, fruity, and refreshingly bright." data-ar="مزيج استوائي من فاكهة الشغف — حامض وفاكهي ومنعش.">A tropical passion fruit blend — tangy, fruity, and refreshingly bright.</div>
+          <div class="card-price">350,000 LL</div>
+        </div>
+        <div class="card-img-wrap"><img src="passionada.jpeg" alt="Passionada" loading="lazy" /></div>
+      </div>
+
+      <div class="menu-card visible" data-cat="speciality" data-name="pinacolada pina colada piña colada">
+        <div class="card-info">
+          <div class="card-name" data-en="Pinacolada" data-ar="بينا كولادا">Pinacolada</div>
+          <div class="card-desc" data-en="Pineapple and creamy coconut blended smooth — tropical, sweet, and refreshing." data-ar="أناناس وجوز هند كريمي ممزوجان بنعومة — استوائي وحلو ومنعش.">Pineapple and creamy coconut blended smooth — tropical, sweet, and refreshing.</div>
+          <div class="card-price">350,000 LL</div>
+        </div>
+        <div class="card-img-wrap"><img src="pinacolada.jpeg" alt="Pinacolada" loading="lazy" /></div>
+      </div>
+
+    </div>
+  </div>
 
   <!-- ── HOT DRINKS ── -->
   <div class="menu-section" data-section="hot">
@@ -937,14 +982,6 @@
       </div>
 
       <!-- NEW -->
-      <div class="menu-card visible" data-cat="smoothies" data-name="passionada passion fruit">
-        <div class="card-info">
-          <div class="card-name" data-en="Passionada" data-ar="باسيونادا">Passionada</div>
-          <div class="card-desc" data-en="A tropical passion fruit blend — tangy, fruity, and refreshingly bright." data-ar="مزيج استوائي من فاكهة الشغف — حامض وفاكهي ومنعش.">A tropical passion fruit blend — tangy, fruity, and refreshingly bright.</div>
-          <div class="card-price">350,000 LL</div>
-        </div>
-        <div class="card-img-wrap"><img src="passionada.jpeg" alt="Passionada" loading="lazy" /></div>
-      </div>
 
       <div class="menu-card visible" data-cat="smoothies" data-name="strawberry lemonade">
         <div class="card-info">
@@ -955,14 +992,6 @@
         <div class="card-img-wrap"><img src="strawberry-lemonade.jpeg" alt="Strawberry Lemonade" loading="lazy" /></div>
       </div>
 
-      <div class="menu-card visible" data-cat="smoothies" data-name="pinacolada">
-        <div class="card-info">
-          <div class="card-name" data-en="Pinacolada" data-ar="بينا كولادا">Pinacolada</div>
-          <div class="card-desc" data-en="smooth — tropical, sweet, and refreshing." data-ar="أناناس وجوز هند كريمي ممزوجان بنعومة — استوائي وحلو ومنعش.">Pineapple and creamy coconut blended smooth — tropical, sweet, and refreshing.</div>
-          <div class="card-price">350,000 LL</div>
-        </div>
-        <div class="card-img-wrap"><img src="pinacolada.jpeg" alt="Pinacolada" loading="lazy" /></div>
-      </div>
 
     </div>
   </div>
