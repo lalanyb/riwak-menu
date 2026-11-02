@@ -153,7 +153,7 @@
     background: var(--white);
     padding: 16px 24px;
     position: sticky;
-    top: 89px;
+    top: var(--header-h, 142px); /* set automatically by JS to match the real header height */
     z-index: 90;
     border-bottom: 1px solid var(--beige);
   }
@@ -323,8 +323,8 @@
       object-fit: cover;
     }
 
-    /* Filter bar */
-    .filter-bar { padding: 12px 14px; top: 65px; }
+    /* Filter bar (top offset comes from --header-h, set by JS) */
+    .filter-bar { padding: 12px 14px; }
     .search-wrap { margin-bottom: 10px; }
     #search-input { font-size: 13px; padding: 9px 14px 9px 38px; }
     [dir="rtl"] #search-input { padding: 9px 38px 9px 14px; }
@@ -420,7 +420,7 @@
 <div class="filter-bar">
   <div class="search-wrap">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="text" id="search-input" placeholder="Search drinks..." oninput="filterItems()" autocomplete="off" />
+    <input type="text" id="search-input" placeholder="Search menu..." oninput="filterItems()" autocomplete="off" />
   </div>
   <div class="categories" id="cat-row">
     <button class="cat-btn active" data-cat="all"        onclick="setCategory('all',this)"        data-en="All Items"       data-ar="الكل">All Items</button>
@@ -1028,8 +1028,6 @@
     <h2 class="section-title" data-en="Desserts" data-ar="حلويات">Desserts</h2>
     <div class="menu-grid">
 
-      <!-- FIX: data-name changed to "cookies filled stuffed" to distinguish from plain cookies in search -->
-      <!-- FIX: data-en updated to match visible text "Cookies with Filling" -->
       <div class="menu-card visible" data-cat="sweets" data-name="cookies filled stuffed lotus nutella oreo">
         <div class="card-info">
           <div class="card-name" data-en="Cookies with Filling" data-ar="كوكيز محشي">Cookies with Filling</div>
@@ -1079,47 +1077,37 @@
   </div>
 
   <!-- ── SNACKS ── -->
-<div class="menu-section" data-section="snacks">
-  <h2 class="section-title" data-en="Snacks" data-ar="سناكات">Snacks</h2>
+  <div class="menu-section" data-section="snacks">
+    <h2 class="section-title" data-en="Snacks" data-ar="سناكات">Snacks</h2>
 
-  <div class="menu-grid">
+    <div class="menu-grid">
 
-    <!-- Croissant -->
-    <div class="menu-card visible" data-cat="snacks" data-name="croissant">
-      <div class="card-info">
-        <div class="card-name" data-en="Croissant" data-ar="كرواسون">Croissant</div>
-        <div class="card-desc"
-             data-en="Freshly baked croissant."
-             data-ar="كرواسون مخبوز طازجاً.">
-          Freshly baked croissant.
+      <!-- Croissant -->
+      <div class="menu-card visible" data-cat="snacks" data-name="croissant">
+        <div class="card-info">
+          <div class="card-name" data-en="Croissant" data-ar="كرواسون">Croissant</div>
+          <div class="card-desc" data-en="Freshly baked croissant." data-ar="كرواسون مخبوز طازجاً.">Freshly baked croissant.</div>
+          <div class="card-price">100,000 LL</div>
         </div>
-        <div class="card-price">100,000 LL</div>
-      </div>
-
-      <div class="card-img-wrap">
-        <img src="croissant.jpeg" alt="Croissant" loading="lazy" />
-      </div>
-    </div>
-
-    <!-- Turkey & Cheese -->
-    <div class="menu-card visible" data-cat="snacks" data-name="turkey cheese sandwich">
-      <div class="card-info">
-        <div class="card-name" data-en="Turkey & Cheese" data-ar="حبش وجبنة">Turkey & Cheese</div>
-        <div class="card-desc"
-             data-en="Turkey and cheese sandwich."
-             data-ar="ساندويتش حبش وجبنة.">
-          Turkey and cheese sandwich.
+        <div class="card-img-wrap">
+          <img src="croissant.jpeg" alt="Croissant" loading="lazy" />
         </div>
-        <div class="card-price">350,000 LL</div>
       </div>
 
-      <div class="card-img-wrap">
-        <img src="turkey-and-cheese.jpeg" alt="Turkey & Cheese" loading="lazy" />
+      <!-- Turkey & Cheese -->
+      <div class="menu-card visible" data-cat="snacks" data-name="turkey cheese sandwich">
+        <div class="card-info">
+          <div class="card-name" data-en="Turkey & Cheese" data-ar="حبش وجبنة">Turkey & Cheese</div>
+          <div class="card-desc" data-en="Turkey and cheese sandwich." data-ar="ساندويتش حبش وجبنة.">Turkey and cheese sandwich.</div>
+          <div class="card-price">350,000 LL</div>
+        </div>
+        <div class="card-img-wrap">
+          <img src="turkey-and-cheese.jpeg" alt="Turkey & Cheese" loading="lazy" />
+        </div>
       </div>
+
     </div>
-
   </div>
-</div>
 
   <!-- ── SHISHA ── -->
   <div class="menu-section" data-section="shisha">
@@ -1186,6 +1174,15 @@
 </footer>
 
 <script>
+  // ── Keep the filter bar right under the sticky header ──
+  function setStickyOffsets() {
+    const h = document.querySelector('header').offsetHeight;
+    document.documentElement.style.setProperty('--header-h', h + 'px');
+  }
+  window.addEventListener('load', setStickyOffsets);
+  window.addEventListener('resize', setStickyOffsets);
+  setStickyOffsets();
+
   // ── Language toggle ──
   let currentLang = 'en';
   function toggleLang() {
@@ -1198,6 +1195,7 @@
     document.querySelectorAll('[data-en]').forEach(el => {
       el.textContent = el.getAttribute(isAr ? 'data-ar' : 'data-en');
     });
+    setStickyOffsets();
   }
 
   // ── Category filter ──
@@ -1209,17 +1207,34 @@
     filterItems();
 
     const main = document.getElementById('menu-main');
+    const header = document.querySelector('header');
     const filterBar = document.querySelector('.filter-bar');
-    const offset = main.getBoundingClientRect().top + window.scrollY - filterBar.offsetHeight - 8;
+    const offset = main.getBoundingClientRect().top + window.scrollY
+                 - header.offsetHeight - filterBar.offsetHeight - 8;
     window.scrollTo({ top: offset, behavior: 'smooth' });
   }
 
   // ── Search + filter ──
   function filterItems() {
     const query = document.getElementById('search-input').value.toLowerCase().trim();
+    const searching = query.length > 0;
+
+    // When searching, ignore the category and search the whole menu
+    if (searching && activeCategory !== 'all') {
+      activeCategory = 'all';
+      document.querySelectorAll('.cat-btn').forEach(b =>
+        b.classList.toggle('active', b.dataset.cat === 'all'));
+    }
+
     document.querySelectorAll('.menu-card').forEach(card => {
-      const catMatch = activeCategory === 'all' || card.getAttribute('data-cat') === activeCategory;
-      const searchMatch = !query || card.getAttribute('data-name').toLowerCase().includes(query);
+      const catMatch = searching || activeCategory === 'all' || card.getAttribute('data-cat') === activeCategory;
+
+      // match English keywords AND the Arabic name
+      const nameAr = (card.querySelector('.card-name')?.getAttribute('data-ar') || '').toLowerCase();
+      const searchMatch = !searching ||
+        card.getAttribute('data-name').toLowerCase().includes(query) ||
+        nameAr.includes(query);
+
       const show = catMatch && searchMatch;
       card.classList.toggle('hidden', !show);
       if (show) {
@@ -1228,6 +1243,7 @@
         card.classList.add('visible');
       }
     });
+
     document.querySelectorAll('.menu-section').forEach(section => {
       const hasVisible = section.querySelectorAll('.menu-card:not(.hidden)').length > 0;
       section.style.display = hasVisible ? '' : 'none';
@@ -1235,7 +1251,7 @@
   }
 
   // ── Hero slideshow ──
-  // FIX: initialized to 1 to match the slide that has class="active" in HTML
+  // initialized to 1 to match the slide that has class="active" in HTML
   let currentSlide = 1;
   const slides = document.querySelectorAll('.hero-images .slide');
   function showNextSlide() {
